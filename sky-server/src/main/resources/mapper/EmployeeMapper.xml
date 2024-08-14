@@ -2,7 +2,39 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.sky.mapper.EmployeeMapper">
+    <!-- parameterType 别名 -->
+    <update id="startOrStop" parameterType="Employee">
+        update employee
+        <set>
+            <if test="status != null">
+                status = #{status},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
 
+    <update id="update">
+        update employee
+        <set>
+            <if test="name != null">
+                name = #{name},
+            </if>
+            <if test="username != null">
+                password = #{username},
+            </if>
+            <if test="phone != null">
+                phone = #{phone},
+            </if>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="idNumber != null">
+                id_number = #{idNumber},
+            </if>
+        </set>
+    </update>
+
+    <!-- resultType 全路径 -->
     <select id="pageQuery" resultType="com.sky.entity.Employee">
         select * from employee
         <where>
@@ -11,5 +43,9 @@
             </if>
         </where>
         order by create_time desc
+    </select>
+
+    <select id="getById" resultType="com.sky.entity.Employee">
+        select * from employee where id = #{id}
     </select>
 </mapper>
