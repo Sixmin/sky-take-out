@@ -32,6 +32,7 @@
                 id_number = #{idNumber},
             </if>
         </set>
+        where id = #{id}
     </update>
 
     <!-- resultType 全路径 -->
